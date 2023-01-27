@@ -45,19 +45,19 @@ group_path -name INPUTS -from [ get_ports -filter "direction==in&&full_name!~*cl
 group_path -name OUTPUTS -to [ get_ports -filter "direction==out" ]
 
 #set_input_delay is used to contrain input ports
-set_input_delay -max -1 -clock wclk2x {wdata_in[*]}
-set_input_delay -max -1 -clock rclk {rinc}
-set_input_delay -max -1 -clock wclk {winc}
+set_input_delay -max -0.2 -clock wclk2x {wdata_in[*]}
+set_input_delay -max -0.2 -clock rclk {rinc}
+set_input_delay -max -0.2 -clock wclk {winc}
 
 # min is used contrain for minimum delay contraints
-set_input_delay -min -0.5 -clock wclk2x {wdata_in[*]}
-set_input_delay -min -0.5 -clock rclk {rinc}
-set_input_delay -min -0.5 -clock wclk {winc}
+#set_input_delay -min 0.05 -clock wclk2x {wdata_in[*]}
+#set_input_delay -min 0.05 -clock rclk {rinc}
+#set_input_delay -min 0.05 -clock wclk {winc}
 
 #set output delay is used to contrain output ports doe maximum and minimum delays
-set_output_delay -max -0.95 -clock rclk {rdata[*]}
-set_output_delay -max -0.95 -clock rclk {rempty}
-set_output_delay -max -0.95 -clock wclk {wfull}
+set_output_delay -max -0.9 -clock rclk {rdata[*]}
+set_output_delay -max -0.9 -clock rclk {rempty}
+set_output_delay -max -0.9 -clock wclk {wfull}
 
 set_output_delay -min -0.55 -clock rclk {rdata[*]}
 set_output_delay -min -0.55 -clock rclk {rempty}
@@ -68,7 +68,8 @@ set_load 0.0001 [get_ports -filter "direction == out"]
 
 #set drive is used to set input resistance for INPUT path group
 set_drive 0.0001 [get_ports -filter "direction == in"]
-
+set_input_transition -max 0.3 [get_ports -filter "direction == in"]
+set_input_transition -min 0.15 [get_ports -filter "direction == in"]
 # clock changes will be modeled with set_clock_uncertainity
 set_clock_latency 1 [get_clocks *clk*]
 # latency is parameter where we moel the clock path delays that arebnot at seen or not at built
@@ -77,4 +78,10 @@ set_clock_uncertainty -hold 0.005 [get_clocks *clk*]
 # clokcs at=re not ideal to make them transition values the below command is used
 set_clock_transition 0.33 [get_clocks *clk*]
 
+set_input_delay 0.0 fifo1_sramb/rrst_n -clock rclk
+set_input_delay 0.0 fifo1_sramb/rrst_n -clock wclk
+set_input_delay 0.0 fifo1_sramb/rrst_n -clock wclk2x 
 
+set_input_delay 0.0  fifo1_sramb/wrst_n -clock rclk
+set_input_delay 0.0  fifo1_sramb/wrst_n -clock wclk
+set_input_delay 0.0 fifo1_sramb/wrst_n -clock wclk2x

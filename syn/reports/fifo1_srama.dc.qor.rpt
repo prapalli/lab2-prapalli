@@ -5,18 +5,18 @@ Information: Updating design information... (UID-85)
 Report : qor
 Design : fifo1_srama
 Version: Q-2019.12-SP3
-Date   : Thu Jan 26 13:58:56 2023
+Date   : Thu Jan 26 22:58:59 2023
 ****************************************
 
 
   Timing Path Group 'INPUTS'
   -----------------------------------
-  Levels of Logic:               0.00
-  Critical Path Length:          0.00
-  Critical Path Slack:          -0.22
+  Levels of Logic:               1.00
+  Critical Path Length:          0.69
+  Critical Path Slack:          -0.97
   Critical Path Clk Period:      1.00
-  Total Negative Slack:         -1.76
-  No. of Violating Paths:        8.00
+  Total Negative Slack:        -14.08
+  No. of Violating Paths:       52.00
   Worst Hold Violation:          0.00
   Total Hold Violation:          0.00
   No. of Hold Violations:        0.00
@@ -24,12 +24,12 @@ Date   : Thu Jan 26 13:58:56 2023
 
   Timing Path Group 'OUTPUTS'
   -----------------------------------
-  Levels of Logic:               2.00
-  Critical Path Length:          0.45
-  Critical Path Slack:           0.45
+  Levels of Logic:               4.00
+  Critical Path Length:          1.81
+  Critical Path Slack:          -0.91
   Critical Path Clk Period:      2.00
-  Total Negative Slack:          0.00
-  No. of Violating Paths:        0.00
+  Total Negative Slack:         -8.81
+  No. of Violating Paths:       10.00
   Worst Hold Violation:          0.00
   Total Hold Violation:          0.00
   No. of Hold Violations:        0.00
@@ -38,13 +38,13 @@ Date   : Thu Jan 26 13:58:56 2023
   Timing Path Group 'rclk'
   -----------------------------------
   Levels of Logic:              13.00
-  Critical Path Length:          1.14
-  Critical Path Slack:           0.64
+  Critical Path Length:          1.11
+  Critical Path Slack:           0.67
   Critical Path Clk Period:      2.00
   Total Negative Slack:          0.00
   No. of Violating Paths:        0.00
   Worst Hold Violation:         -0.20
-  Total Hold Violation:        -11.05
+  Total Hold Violation:        -10.86
   No. of Hold Violations:       56.00
   -----------------------------------
 
@@ -52,12 +52,12 @@ Date   : Thu Jan 26 13:58:56 2023
   -----------------------------------
   Levels of Logic:              12.00
   Critical Path Length:          1.04
-  Critical Path Slack:           0.73
+  Critical Path Slack:           0.74
   Critical Path Clk Period:      2.00
   Total Negative Slack:          0.00
   No. of Violating Paths:        0.00
   Worst Hold Violation:         -0.21
-  Total Hold Violation:        -24.25
+  Total Hold Violation:        -24.19
   No. of Hold Violations:      120.00
   -----------------------------------
 
@@ -66,12 +66,12 @@ Date   : Thu Jan 26 13:58:56 2023
   -----------------------------------
   Hierarchical Cell Count:          5
   Hierarchical Port Count:        160
-  Leaf Cell Count:                295
+  Leaf Cell Count:                389
   Buf/Inv Cell Count:              35
   Buf Cell Count:                   0
   Inv Cell Count:                  35
   CT Buf/Inv Cell Count:            0
-  Combinational Cell Count:       191
+  Combinational Cell Count:       285
   Sequential Cell Count:          104
   Macro Count:                      0
   -----------------------------------
@@ -79,23 +79,24 @@ Date   : Thu Jan 26 13:58:56 2023
 
   Area
   -----------------------------------
-  Combinational Area:      464.066947
-  Noncombinational Area:   833.592340
-  Buf/Inv Area:             44.475200
+  Combinational Area:   180590.122377
+  Noncombinational Area:
+                        120833.592340
+  Buf/Inv Area:             64.044287
   Total Buffer Area:             0.00
-  Total Inverter Area:          44.48
+  Total Inverter Area:          64.04
   Macro/Black Box Area: 209907.328125
-  Net Area:                876.085796
+  Net Area:               1104.467129
   -----------------------------------
-  Cell Area:            211204.987412
-  Design Area:          212081.073208
+  Cell Area:            511331.042842
+  Design Area:          512435.509971
 
 
   Design Rules
   -----------------------------------
-  Total Number of Nets:           418
-  Nets With Violations:            64
-  Max Trans Violations:             0
+  Total Number of Nets:           518
+  Nets With Violations:            74
+  Max Trans Violations:            10
   Max Cap Violations:              64
   -----------------------------------
 
@@ -104,19 +105,19 @@ Date   : Thu Jan 26 13:58:56 2023
 
   Compile CPU Statistics
   -----------------------------------------
-  Resource Sharing:                    0.05
-  Logic Optimization:                  0.45
-  Mapping Optimization:                1.25
+  Resource Sharing:                    0.06
+  Logic Optimization:                  4.35
+  Mapping Optimization:              115.22
   -----------------------------------------
-  Overall Compile Time:                9.06
-  Overall Compile Wall Clock Time:     9.80
+  Overall Compile Time:              127.80
+  Overall Compile Wall Clock Time:   129.02
 
   --------------------------------------------------------------------
 
-  Design  WNS: 0.22  TNS: 1.76  Number of Violating Paths: 8
+  Design  WNS: 0.97  TNS: 22.88  Number of Violating Paths: 62
 
 
-  Design (Hold)  WNS: 0.21  TNS: 35.30  Number of Violating Paths: 176
+  Design (Hold)  WNS: 0.21  TNS: 35.05  Number of Violating Paths: 176
 
   --------------------------------------------------------------------
 

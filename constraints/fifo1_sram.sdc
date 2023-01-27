@@ -42,9 +42,9 @@ set_false_path -from [get_clocks rclk ] -to [ get_clocks wclk]
 group_path -name INPUTS -from [ get_ports -filter "direction==in&&full_name!~*clk*" ]
 group_path -name OUTPUTS -to [ get_ports -filter "direction==out" ]
 #set_input_delay is used to contrain input ports
-set_input_delay -max 1.0 -clock wclk2x {wdata_in[*]}
-set_input_delay -max 1.0 -clock rclk {rinc}
-set_input_delay -max 1.0 -clock wclk {winc}
+set_input_delay -max 1 -clock wclk2x {wdata_in[*]}
+set_input_delay -max 1 -clock rclk {rinc}
+set_input_delay -max 1 -clock wclk {winc}
 
 # min is used contrain for minimum delay contraints
 set_input_delay -min 0.5 -clock wclk2x {wdata_in[*]}
