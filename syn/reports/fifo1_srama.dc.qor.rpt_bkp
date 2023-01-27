@@ -1,0 +1,97 @@
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : qor
+Design : fifo1_srama
+Version: Q-2019.12-SP3
+Date   : Mon Jan 23 17:03:59 2023
+****************************************
+
+
+  Timing Path Group 'rclk'
+  -----------------------------------
+  Levels of Logic:              24.00
+  Critical Path Length:          1.39
+  Critical Path Slack:           0.49
+  Critical Path Clk Period:      2.00
+  Total Negative Slack:          0.00
+  No. of Violating Paths:        0.00
+  Worst Hold Violation:         -0.09
+  Total Hold Violation:         -5.16
+  No. of Hold Violations:       56.00
+  -----------------------------------
+
+  Timing Path Group 'wclk'
+  -----------------------------------
+  Levels of Logic:              24.00
+  Critical Path Length:          1.39
+  Critical Path Slack:           0.49
+  Critical Path Clk Period:      2.00
+  Total Negative Slack:          0.00
+  No. of Violating Paths:        0.00
+  Worst Hold Violation:         -0.11
+  Total Hold Violation:        -12.15
+  No. of Hold Violations:      120.00
+  -----------------------------------
+
+
+  Cell Count
+  -----------------------------------
+  Hierarchical Cell Count:          5
+  Hierarchical Port Count:        160
+  Leaf Cell Count:                293
+  Buf/Inv Cell Count:              61
+  Buf Cell Count:                   0
+  Inv Cell Count:                  61
+  CT Buf/Inv Cell Count:            0
+  Combinational Cell Count:       189
+  Sequential Cell Count:          104
+  Macro Count:                      0
+  -----------------------------------
+
+
+  Area
+  -----------------------------------
+  Combinational Area:      396.718782
+  Noncombinational Area:   833.592340
+  Buf/Inv Area:             77.513920
+  Total Buffer Area:             0.00
+  Total Inverter Area:          77.51
+  Macro/Black Box Area: 209907.328125
+  Net Area:                907.088333
+  -----------------------------------
+  Cell Area:            211137.639247
+  Design Area:          212044.727580
+
+
+  Design Rules
+  -----------------------------------
+  Total Number of Nets:           404
+  Nets With Violations:            64
+  Max Trans Violations:             0
+  Max Cap Violations:              64
+  -----------------------------------
+
+
+  Hostname: mo.ece.pdx.edu
+
+  Compile CPU Statistics
+  -----------------------------------------
+  Resource Sharing:                    0.04
+  Logic Optimization:                  0.12
+  Mapping Optimization:                1.08
+  -----------------------------------------
+  Overall Compile Time:                8.28
+  Overall Compile Wall Clock Time:     9.06
+
+  --------------------------------------------------------------------
+
+  Design  WNS: 0.00  TNS: 0.00  Number of Violating Paths: 0
+
+
+  Design (Hold)  WNS: 0.11  TNS: 17.32  Number of Violating Paths: 176
+
+  --------------------------------------------------------------------
+
+
+1

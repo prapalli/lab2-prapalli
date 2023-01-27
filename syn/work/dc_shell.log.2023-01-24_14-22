@@ -1,0 +1,12 @@
+setting auto_restore_mw_cel_lib_setup true
+Initializing gui preferences from file  /u/prapalli/.synopsys_dv_prefs.tcl
+dc_shell> 
+dc_shell> exit 1
+
+Memory usage for this session 54 Mbytes.
+Memory usage for this session including child processes 54 Mbytes.
+CPU usage for this session 3 seconds ( 0.00 hours ).
+Elapsed time for this session 11281 seconds ( 3.13 hours ).
+
+Thank you...
+

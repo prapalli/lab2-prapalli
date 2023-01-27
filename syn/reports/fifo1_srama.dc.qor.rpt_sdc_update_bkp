@@ -1,0 +1,124 @@
+Warning: There are infeasible paths detected in your design that were ignored during optimization. Please run 'report_timing -attributes' and/or 'create_qor_snapshot/query_qor_snapshot -infeasible_paths' to identify these paths.  (OPT-1721)
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : qor
+Design : fifo1_srama
+Version: Q-2019.12-SP3
+Date   : Wed Jan 25 02:23:55 2023
+****************************************
+
+
+  Timing Path Group 'INPUTS'
+  -----------------------------------
+  Levels of Logic:               0.00
+  Critical Path Length:          0.00
+  Critical Path Slack:          -0.22
+  Critical Path Clk Period:      1.00
+  Total Negative Slack:         -1.76
+  No. of Violating Paths:        8.00
+  Worst Hold Violation:          0.00
+  Total Hold Violation:          0.00
+  No. of Hold Violations:        0.00
+  -----------------------------------
+
+  Timing Path Group 'OUTPUTS'
+  -----------------------------------
+  Levels of Logic:               2.00
+  Critical Path Length:          0.45
+  Critical Path Slack:           0.45
+  Critical Path Clk Period:      2.00
+  Total Negative Slack:          0.00
+  No. of Violating Paths:        0.00
+  Worst Hold Violation:          0.00
+  Total Hold Violation:          0.00
+  No. of Hold Violations:        0.00
+  -----------------------------------
+
+  Timing Path Group 'rclk'
+  -----------------------------------
+  Levels of Logic:              13.00
+  Critical Path Length:          1.14
+  Critical Path Slack:           0.64
+  Critical Path Clk Period:      2.00
+  Total Negative Slack:          0.00
+  No. of Violating Paths:        0.00
+  Worst Hold Violation:         -0.25
+  Total Hold Violation:        -13.85
+  No. of Hold Violations:       56.00
+  -----------------------------------
+
+  Timing Path Group 'wclk'
+  -----------------------------------
+  Levels of Logic:              12.00
+  Critical Path Length:          1.04
+  Critical Path Slack:           0.73
+  Critical Path Clk Period:      2.00
+  Total Negative Slack:          0.00
+  No. of Violating Paths:        0.00
+  Worst Hold Violation:         -0.26
+  Total Hold Violation:        -30.25
+  No. of Hold Violations:      120.00
+  -----------------------------------
+
+
+  Cell Count
+  -----------------------------------
+  Hierarchical Cell Count:          5
+  Hierarchical Port Count:        160
+  Leaf Cell Count:                295
+  Buf/Inv Cell Count:              35
+  Buf Cell Count:                   0
+  Inv Cell Count:                  35
+  CT Buf/Inv Cell Count:            0
+  Combinational Cell Count:       191
+  Sequential Cell Count:          104
+  Macro Count:                      0
+  -----------------------------------
+
+
+  Area
+  -----------------------------------
+  Combinational Area:      464.066947
+  Noncombinational Area:   833.592340
+  Buf/Inv Area:             44.475200
+  Total Buffer Area:             0.00
+  Total Inverter Area:          44.48
+  Macro/Black Box Area: 209907.328125
+  Net Area:                876.085796
+  -----------------------------------
+  Cell Area:            211204.987412
+  Design Area:          212081.073208
+
+
+  Design Rules
+  -----------------------------------
+  Total Number of Nets:           418
+  Nets With Violations:            64
+  Max Trans Violations:             0
+  Max Cap Violations:              64
+  -----------------------------------
+
+
+  Hostname: mo.ece.pdx.edu
+
+  Compile CPU Statistics
+  -----------------------------------------
+  Resource Sharing:                    0.04
+  Logic Optimization:                  0.43
+  Mapping Optimization:                1.12
+  -----------------------------------------
+  Overall Compile Time:                8.59
+  Overall Compile Wall Clock Time:     9.37
+
+  --------------------------------------------------------------------
+
+  Design  WNS: 0.22  TNS: 1.76  Number of Violating Paths: 8
+
+
+  Design (Hold)  WNS: 0.26  TNS: 44.10  Number of Violating Paths: 176
+
+  --------------------------------------------------------------------
+
+
+1

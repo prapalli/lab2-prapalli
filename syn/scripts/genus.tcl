@@ -61,6 +61,7 @@ update_names -inst -hnet -restricted {]} -convert_string "_"
 
 
 # Load the timing and design constraints
+sh echo "hellohere"
 source -echo -verbose ../../constraints/${top_design}.sdc
 
 set_dont_use [get_lib_cells */DELLN* ]

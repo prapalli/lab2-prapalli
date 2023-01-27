@@ -1,0 +1,1278 @@
+setting auto_restore_mw_cel_lib_setup true
+Initializing gui preferences from file  /u/prapalli/.synopsys_dv_prefs.tcl
+dc_shell> set top_design fifo1_srama
+fifo1_srama
+dc_shell> source ../scripts/dc.tcl
+set lib_dir /pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib
+/pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib
+# Decoder ring for the libraries
+# You will need to follow another example or look in the library directories to understand.
+# lib_types is used for the dc/dct linking variables and ICC2 NDM lcoations.
+# /pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/stdcell_hvt/db_nldm
+# /          $lib_dir                   /lib/ $lib_type /db_nldm
+# link_library, Target_library use the sub_lib_types and corner variables. 
+# For sub_lib_types and corner:
+# Example:
+#     saed32hvt_ss0p75v125c.db
+#     |sub_lib  corner    .db
+# The current flow tries to find all sub_lib and all corners in all the search paths.  Any match will be put in the library list.
+# Wild cards can be used, but be careful.  Multiple matches can occur in ways you don't want.
+# For the target library, the same method is used as the link library except only HVT and RVT lib_types are used.
+# ICC2 NDM choosing also uses the sub_lib_types so that only the required libraries and extras are not loaded.
+# fifo1
+#set top_design fifo1
+set add_ios 1
+1
+set pad_design 1
+1
+set design_size { 580 580  } 
+ 580 580  
+set design_io_border 310
+310
+set dc_floorplanning 1
+1
+set enable_dft 0
+0
+set innovus_enable_manual_macro_placement 0
+0
+set rtl_list [list ../rtl/$top_design.sv ]
+../rtl/fifo1_srama.sv
+set slow_corner "ss0p95v125c_2p25v ss0p95v125c ss0p75v125c_i0p75v"
+ss0p95v125c_2p25v ss0p95v125c ss0p75v125c_i0p75v
+set fast_corner "ff0p95vn40c ff1p16vn40c_2p75v ff1p16vn40c"
+ff0p95vn40c ff1p16vn40c_2p75v ff1p16vn40c
+set synth_corners $slow_corner
+ss0p95v125c_2p25v ss0p95v125c ss0p75v125c_i0p75v
+set synth_corners_target "ss0p95v125c" 
+ss0p95v125c
+#set synth_corners_target "ss0p95v125c" 
+set synth_corners_slow $slow_corner
+ss0p95v125c_2p25v ss0p95v125c ss0p75v125c_i0p75v
+set synth_corners_fast $fast_corner
+ff0p95vn40c ff1p16vn40c_2p75v ff1p16vn40c
+set slow_metal Cmax_125
+Cmax_125
+set fast_metal Cmax_125
+Cmax_125
+set lib_types "$lib_dir/io_std/db_nldm $lib_dir/sram_lp/db_nldm $lib_dir/pll/db_nldm"
+/pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/io_std/db_nldm /pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/sram_lp/db_nldm /pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/pll/db_nldm
+set ndm_types "$lib_dir/stdcell_rvt/ndm $lib_dir/stdcell_hvt/ndm $lib_dir/sram_lp/ndm $lib_dir/io_std/ndm  $lib_dir/pll/ndm"
+/pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/stdcell_rvt/ndm /pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/stdcell_hvt/ndm /pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/sram_lp/ndm /pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/io_std/ndm  /pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/pll/ndm
+set lib_types_target "$lib_dir/stdcell_rvt/db_nldm"
+/pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/stdcell_rvt/db_nldm
+# Get just the main standard cells, sram_lps and IOs
+set sub_lib_type "saed32?vt_ saed32sramlp_ saed32io_wb_ saed32pll_"
+saed32?vt_ saed32sramlp_ saed32io_wb_ saed32pll_
+set sub_lib_type_target "saed32rvt_"
+saed32rvt_
+set lef_types [list $lib_dir/stdcell_hvt/lef  $lib_dir/stdcell_rvt/lef $lib_dir/stdcell_lvt/lef $lib_dir/sram_lp/lef/ $lib_dir/io_std/lef $lib_dir/pll/lef ]
+/pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/stdcell_hvt/lef /pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/stdcell_rvt/lef /pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/stdcell_lvt/lef /pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/sram_lp/lef/ /pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/io_std/lef /pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/pll/lef
+set sub_lef_type "saed32nm_?vt_*.lef saed32_sram_lp_*.lef saed32io_std_wb saed32_PLL.lef"
+saed32nm_?vt_*.lef saed32_sram_lp_*.lef saed32io_std_wb saed32_PLL.lef
+set mwlib_types [list $lib_dir/stdcell_hvt/milkyway $lib_dir/stdcell_rvt/milkyway $lib_dir/stdcell_lvt/milkyway  $lib_dir/io_std/milkyway $lib_dir/sram_lp/milkyway $lib_dir/pll/milkyway  ]
+/pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/stdcell_hvt/milkyway /pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/stdcell_rvt/milkyway /pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/stdcell_lvt/milkyway /pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/io_std/milkyway /pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/sram_lp/milkyway /pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/pll/milkyway
+set sub_mwlib_type "saed32nm_?vt_* SRAM32NM saed32io_wb_* SAED32_PLL_FR*"
+saed32nm_?vt_* SRAM32NM saed32io_wb_* SAED32_PLL_FR*
+#set topdir /u/$env(USER)/PSU_RTL2GDS
+set topdir [ lindex [ regexp -inline "(.*)\(syn\|pt\|apr\)" [pwd] ] 1 ]
+/u/prapalli/ECE581-2023/lab2-prapalli/
+set FCL 0
+0
+set split_constraints 0
+0
+Warning: No designs to list. (UID-275)
+== ANALYZE autoread all files ==
+
+Starting ANALYZE autoread mode...
+Warning: Defining design library 'WORK' at directory '/u/prapalli/ECE581-2023/lab2-prapalli/syn/work/WORK_autoread'. (AUTOREAD-107)
+Information: Adding '/u/prapalli/ECE581-2023/lab2-prapalli/syn/rtl/fifo1_srama.sv'.  (AUTOREAD-100)
+Information: Scanning file { fifo1_srama.sv }. (AUTOREAD-303)
+Compiling source file /u/prapalli/ECE581-2023/lab2-prapalli/syn/rtl/fifo1_srama.sv
+Presto compilation completed successfully.
+Autoread command completed successfully.
+Loading db file '/pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/io_std/db_nldm/saed32io_wb_ss0p95v125c_2p25v.db'
+Loading db file '/pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/sram_lp/db_nldm/saed32sramlp_ss0p75v125c_i0p75v.db'
+Loading db file '/pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/pll/db_nldm/saed32pll_ss0p95v125c_2p25v.db'
+Loading db file '/pkgs/synopsys/2020/design_compiler/syn/Q-2019.12-SP3/libraries/syn/dw_foundation.sldb'
+Loading db file '/pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/stdcell_rvt/db_nldm/saed32rvt_ss0p95v125c.db'
+Loading db file '/pkgs/synopsys/2020/design_compiler/syn/Q-2019.12-SP3/libraries/syn/gtech.db'
+Loading db file '/pkgs/synopsys/2020/design_compiler/syn/Q-2019.12-SP3/libraries/syn/standard.sldb'
+  Loading link library 'saed32io_wb_ss0p95v125c_2p25v'
+  Loading link library 'saed32sramlp_ss0p75v125c_i0p75v'
+  Loading link library 'saed32pll_ss0p95v125c_2p25v'
+  Loading link library 'saed32rvt_ss0p95v125c'
+  Loading link library 'gtech'
+Running PRESTO HDLC
+
+Inferred memory devices in process
+        in routine fifo1_srama line 19 in file
+                '/u/prapalli/ECE581-2023/lab2-prapalli/syn/rtl/fifo1_srama.sv'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|      wdata_reg      | Flip-flop |   8   |  Y  | N  | Y  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully. (fifo1_srama)
+Elaborated 1 design.
+Current design is now 'fifo1_srama'.
+Information: Building the design 'sync_r2w'. (HDL-193)
+
+Inferred memory devices in process
+        in routine sync_r2w line 145 in file
+                '/u/prapalli/ECE581-2023/lab2-prapalli/syn/rtl/fifo1_srama.sv'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|    wq2_rptr_reg     | Flip-flop |  11   |  Y  | N  | Y  | N  | N  | N  | N  |
+|    wq1_rptr_reg     | Flip-flop |  11   |  Y  | N  | Y  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully. (sync_r2w)
+Information: Building the design 'sync_w2r'. (HDL-193)
+
+Inferred memory devices in process
+        in routine sync_w2r line 156 in file
+                '/u/prapalli/ECE581-2023/lab2-prapalli/syn/rtl/fifo1_srama.sv'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|    rq2_wptr_reg     | Flip-flop |  11   |  Y  | N  | Y  | N  | N  | N  | N  |
+|    rq1_wptr_reg     | Flip-flop |  11   |  Y  | N  | Y  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully. (sync_w2r)
+Information: Building the design 'fifomem' instantiated from design 'fifo1_srama' with
+        the parameters "8,10". (HDL-193)
+Warning:  /u/prapalli/ECE581-2023/lab2-prapalli/syn/rtl/fifo1_srama.sv:71: DEFAULT branch of CASE statement cannot be reached. (ELAB-311)
+Warning:  /u/prapalli/ECE581-2023/lab2-prapalli/syn/rtl/fifo1_srama.sv:86: DEFAULT branch of CASE statement cannot be reached. (ELAB-311)
+
+Statistics for case statements in always block at line 69 in file
+        '/u/prapalli/ECE581-2023/lab2-prapalli/syn/rtl/fifo1_srama.sv'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|            71            |    auto/auto     |
+===============================================
+
+Statistics for case statements in always block at line 84 in file
+        '/u/prapalli/ECE581-2023/lab2-prapalli/syn/rtl/fifo1_srama.sv'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|            86            |    auto/auto     |
+===============================================
+Presto compilation completed successfully. (fifomem_DATASIZE8_ADDRSIZE10)
+Information: Building the design 'rptr_empty' instantiated from design 'fifo1_srama' with
+        the parameters "10". (HDL-193)
+
+Inferred memory devices in process
+        in routine rptr_empty_ADDRSIZE10 line 175 in file
+                '/u/prapalli/ECE581-2023/lab2-prapalli/syn/rtl/fifo1_srama.sv'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|      rbin_reg       | Flip-flop |  11   |  Y  | N  | Y  | N  | N  | N  | N  |
+|      rptr_reg       | Flip-flop |  11   |  Y  | N  | Y  | N  | N  | N  | N  |
+===============================================================================
+
+Inferred memory devices in process
+        in routine rptr_empty_ADDRSIZE10 line 186 in file
+                '/u/prapalli/ECE581-2023/lab2-prapalli/syn/rtl/fifo1_srama.sv'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|     rempty_reg      | Flip-flop |   1   |  N  | N  | N  | Y  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully. (rptr_empty_ADDRSIZE10)
+Information: Building the design 'wptr_full' instantiated from design 'fifo1_srama' with
+        the parameters "10". (HDL-193)
+
+Inferred memory devices in process
+        in routine wptr_full_ADDRSIZE10 line 203 in file
+                '/u/prapalli/ECE581-2023/lab2-prapalli/syn/rtl/fifo1_srama.sv'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|      wbin_reg       | Flip-flop |  11   |  Y  | N  | Y  | N  | N  | N  | N  |
+|      wptr_reg       | Flip-flop |  11   |  Y  | N  | Y  | N  | N  | N  | N  |
+===============================================================================
+
+Inferred memory devices in process
+        in routine wptr_full_ADDRSIZE10 line 218 in file
+                '/u/prapalli/ECE581-2023/lab2-prapalli/syn/rtl/fifo1_srama.sv'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|      wfull_reg      | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully. (wptr_full_ADDRSIZE10)
+#####################################################
+proc insert_io { port side} {
+  set this_io io_${side}_${port}
+  if {  $side == "t"   } {
+   if { [get_attribute [get_ports $port ] direction ] == "in" } {
+    create_cell $this_io saed32io_wb_ss0p95v125c_2p25v/I1025_NS
+   } else {
+    create_cell $this_io saed32io_wb_ss0p95v125c_2p25v/D8I1025_NS
+   }
+  }
+  if { $side == "b"  } {
+   if { [get_attribute [get_ports $port ] direction ] == "in" } {
+    create_cell $this_io saed32io_wb_ss0p95v125c_2p25v/I1025_NS
+   } else {
+    create_cell $this_io saed32io_wb_ss0p95v125c_2p25v/D8I1025_NS
+   }
+  }
+  if {  $side == "r"  } {
+   if { [get_attribute [get_ports $port ] direction ] == "in" } {
+    create_cell $this_io saed32io_wb_ss0p95v125c_2p25v/I1025_NS
+   } else {
+    create_cell $this_io saed32io_wb_ss0p95v125c_2p25v/D8I1025_NS
+   }
+  }
+  if { $side == "l"  } {
+   if { [get_attribute [get_ports $port ] direction ] == "in" } {
+    create_cell $this_io saed32io_wb_ss0p95v125c_2p25v/I1025_NS
+   } else {
+    create_cell $this_io saed32io_wb_ss0p95v125c_2p25v/D8I1025_NS
+   }
+  }
+  set pins [ get_pins -of_obj [ get_net $port ] ]
+  foreach_in i $pins { disconnect_net [get_net $port ] $i }
+  set port_net [get_nets -quiet $port ]
+
+  # If only a port is created, the related net is not created and connected to the port.  Do that here.
+  if { [sizeof_collection $port_net ] == 0 } { 
+      create_net $port 
+      connect_net $port [get_ports $port ]
+  }
+
+  connect_net [get_net $port ]  $this_io/PADIO
+  create_net ${this_io}_net
+  foreach_in i $pins { connect_net ${this_io}_net $i }
+  #DIN is input to IO_PAD
+  #DOUT is output of IO_PAD
+  #EN is the IO_PAD enable to output
+  if { [get_attribute [get_ports $port ] direction ] == "in" } {
+     #connect_net [get_nets  *Logic0* ] ${this_io}/EN 
+     connect_net [get_nets  *Logic1* ] ${this_io}/R_EN 
+     connect_net ${this_io}_net ${this_io}/DOUT
+  } else {
+     connect_net [get_nets  *Logic1* ] $this_io/EN 
+     #connect_net [get_nets  *Logic0* ] $this_io/R_EN 
+     connect_net ${this_io}_net $this_io/DIN
+  }
+}
+####################################################
+Error: could not open script file "../../fifo1_srama.add_ios.tcl" (CMD-015)
+Warning: The specified replacement character (_) is conflicting with the specified allowed or restricted character.   (UCN-4)
+Error: could not open script file "../../constraints/fifo1_srama.sdc" (CMD-015)
+Current design is 'fifo1_srama'.
+Information: Performing power optimization. (PWR-850)
+Alib files are up-to-date.
+Information: Choosing a test methodology will restrict the optimization of sequential cells. (UIO-12)
+Information: Evaluating DesignWare library utilization. (UISN-27)
+
+============================================================================
+| DesignWare Building Block Library  |         Version         | Available |
+============================================================================
+| Basic DW Building Blocks           | Q-2019.12-DWBB_201912.3 |     *     |
+| Licensed DW Building Blocks        | Q-2019.12-DWBB_201912.3 |     *     |
+============================================================================
+
+Information: Sequential output inversion is enabled.  SVF file must be used for formal verification. (OPT-1208)
+
+Information: There are 65 potential problems in your design. Please run 'check_design' for more information. (LINT-99)
+
+  Simplifying Design 'fifo1_srama'
+
+Loaded alib file './alib-52/saed32rvt_ss0p95v125c.db.alib'
+Information: State dependent leakage is now switched from on to off.
+
+  Beginning Pass 1 Mapping
+  ------------------------
+  Processing 'fifomem_DATASIZE8_ADDRSIZE10'
+  Processing 'wptr_full_ADDRSIZE10'
+Information: Added key list 'DesignWare' to design 'wptr_full_ADDRSIZE10'. (DDB-72)
+Information: In design 'wptr_full_ADDRSIZE10', the register 'wptr_reg_10_' is removed because it is merged to 'wbin_reg_10_'. (OPT-1215)
+ Implement Synthetic for 'wptr_full_ADDRSIZE10'.
+  Processing 'rptr_empty_ADDRSIZE10'
+Information: Added key list 'DesignWare' to design 'rptr_empty_ADDRSIZE10'. (DDB-72)
+Information: In design 'rptr_empty_ADDRSIZE10', the register 'rptr_reg_10_' is removed because it is merged to 'rbin_reg_10_'. (OPT-1215)
+ Implement Synthetic for 'rptr_empty_ADDRSIZE10'.
+  Processing 'fifo1_srama'
+  Processing 'sync_w2r'
+  Processing 'sync_r2w'
+
+  Updating timing information
+Information: Updating design information... (UID-85)
+Information: The library cell 'PMT3_RVT' in the library 'saed32rvt_ss0p95v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'PMT2_RVT' in the library 'saed32rvt_ss0p95v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'PMT1_RVT' in the library 'saed32rvt_ss0p95v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT3_RVT' in the library 'saed32rvt_ss0p95v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT2_RVT' in the library 'saed32rvt_ss0p95v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT1_RVT' in the library 'saed32rvt_ss0p95v125c' is not characterized for internal power. (PWR-536)
+Information: The target library(s) contains cell(s), other than black boxes, that are not characterized for internal power. (PWR-24)
+Information: Automatic shift-register identification is enabled for scan. Not all registers will be scan-replaced. (OPT-467)
+
+Threshold voltage group cell usage:
+>> saed32cell_svt 100.00%
+
+  Beginning Mapping Optimizations  (Ultra High effort)
+  -------------------------------
+  Mapping Optimization (Phase 1)
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:30  211140.4      0.00       0.0      29.7                           66997792.0000
+    0:00:30  211140.4      0.00       0.0      29.7                           66997792.0000
+
+Threshold voltage group cell usage:
+>> saed32cell_svt 100.00%
+
+  Beginning Constant Register Removal
+  -----------------------------------
+
+Threshold voltage group cell usage:
+>> saed32cell_svt 100.00%
+
+  Beginning Global Optimizations
+  ------------------------------
+  Numerical Synthesis (Phase 1)
+  Numerical Synthesis (Phase 2)
+  Global Optimization (Phase 1)
+  Global Optimization (Phase 2)
+  Global Optimization (Phase 3)
+  Global Optimization (Phase 4)
+  Global Optimization (Phase 5)
+  Global Optimization (Phase 6)
+  Global Optimization (Phase 7)
+  Global Optimization (Phase 8)
+  Global Optimization (Phase 9)
+  Global Optimization (Phase 10)
+  Global Optimization (Phase 11)
+  Global Optimization (Phase 12)
+  Global Optimization (Phase 13)
+  Global Optimization (Phase 14)
+  Global Optimization (Phase 15)
+  Global Optimization (Phase 16)
+  Global Optimization (Phase 17)
+  Global Optimization (Phase 18)
+  Global Optimization (Phase 19)
+  Global Optimization (Phase 20)
+  Global Optimization (Phase 21)
+  Global Optimization (Phase 22)
+  Global Optimization (Phase 23)
+  Global Optimization (Phase 24)
+  Global Optimization (Phase 25)
+  Global Optimization (Phase 26)
+  Global Optimization (Phase 27)
+  Global Optimization (Phase 28)
+  Global Optimization (Phase 29)
+
+Threshold voltage group cell usage:
+>> saed32cell_svt 100.00%
+
+  Beginning Isolate Ports
+  -----------------------
+
+Threshold voltage group cell usage:
+>> saed32cell_svt 100.00%
+
+  Beginning Delay Optimization
+  ----------------------------
+    0:00:30  211135.4      0.00       0.0      29.7                           68241544.0000
+    0:00:30  211135.4      0.00       0.0      29.7                           68241544.0000
+    0:00:30  211135.4      0.00       0.0      29.7                           68241544.0000
+    0:00:30  211135.4      0.00       0.0      29.7                           68241544.0000
+
+Threshold voltage group cell usage:
+>> saed32cell_svt 100.00%
+    0:00:30  211122.6      0.00       0.0      29.7                           68134248.0000
+    0:00:30  211122.6      0.00       0.0      29.7                           68134248.0000
+
+  Beginning WLM Backend Optimization
+  --------------------------------------
+    0:00:30  211121.4      0.00       0.0      29.7                           68108208.0000
+    0:00:30  211121.4      0.00       0.0      29.7                           68108208.0000
+    0:00:30  211121.4      0.00       0.0      29.7                           68108208.0000
+    0:00:30  211121.4      0.00       0.0      29.7                           66760292.0000
+    0:00:30  211121.4      0.00       0.0      29.7                           66760292.0000
+    0:00:30  211121.4      0.00       0.0      29.7                           66760292.0000
+    0:00:30  211121.4      0.00       0.0      29.7                           66760292.0000
+    0:00:30  211121.4      0.00       0.0      29.7                           66760292.0000
+    0:00:30  211121.4      0.00       0.0      29.7                           66760292.0000
+    0:00:30  211121.4      0.00       0.0      29.7                           66760292.0000
+    0:00:30  211121.4      0.00       0.0      29.7                           66760292.0000
+    0:00:30  211121.4      0.00       0.0      29.7                           66760292.0000
+    0:00:30  211121.4      0.00       0.0      29.7                           66760292.0000
+    0:00:30  211121.4      0.00       0.0      29.7                           66760292.0000
+    0:00:30  211121.4      0.00       0.0      29.7                           66760292.0000
+    0:00:30  211121.4      0.00       0.0      29.7                           66760292.0000
+    0:00:30  211121.4      0.00       0.0      29.7                           66760292.0000
+    0:00:30  211121.4      0.00       0.0      29.7                           66760292.0000
+    0:00:30  211121.4      0.00       0.0      29.7                           66760292.0000
+    0:00:30  211121.4      0.00       0.0      29.7                           66760292.0000
+    0:00:30  211121.4      0.00       0.0      29.7                           66760292.0000
+    0:00:30  211121.4      0.00       0.0      29.7                           66760292.0000
+
+
+  Beginning Design Rule Fixing  (max_capacitance)
+  ----------------------------
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:30  211121.4      0.00       0.0      29.7                           66760292.0000
+  Global Optimization (Phase 30)
+  Global Optimization (Phase 31)
+  Global Optimization (Phase 32)
+    0:00:31  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:00:31  211137.6      0.00       0.0      24.0                           68339168.0000
+
+Threshold voltage group cell usage:
+>> saed32cell_svt 100.00%
+
+
+  Beginning Leakage Power Optimization  (max_leakage_power 0)
+  ------------------------------------
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:31  211137.6      0.00       0.0      24.0                           68339168.0000
+  Global Optimization (Phase 33)
+  Global Optimization (Phase 34)
+  Global Optimization (Phase 35)
+  Global Optimization (Phase 36)
+  Global Optimization (Phase 37)
+  Global Optimization (Phase 38)
+  Global Optimization (Phase 39)
+  Global Optimization (Phase 40)
+  Global Optimization (Phase 41)
+  Global Optimization (Phase 42)
+    0:00:31  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:00:31  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:00:31  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:00:31  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:00:31  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:00:31  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:00:31  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:00:31  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:00:31  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:00:31  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:00:31  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:00:31  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:00:31  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:00:31  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:00:31  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:00:31  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:00:31  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:00:31  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:00:31  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:00:31  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:00:31  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:00:31  211137.6      0.00       0.0      24.0                           68339168.0000
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:31  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:00:31  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:00:31  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:00:31  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:00:31  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:00:32  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:00:32  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:00:32  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:00:32  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:00:32  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:00:32  211137.6      0.00       0.0      24.0                           68339168.0000
+Loading db file '/pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/io_std/db_nldm/saed32io_wb_ss0p95v125c_2p25v.db'
+Loading db file '/pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/sram_lp/db_nldm/saed32sramlp_ss0p75v125c_i0p75v.db'
+Loading db file '/pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/pll/db_nldm/saed32pll_ss0p95v125c_2p25v.db'
+Loading db file '/pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/stdcell_rvt/db_nldm/saed32rvt_ss0p95v125c.db'
+
+
+Note: Symbol # after min delay cost means estimated hold TNS across all active scenarios 
+
+
+  Optimization Complete
+  ---------------------
+Information: State dependent leakage is now switched from off to on.
+Information: Propagating switching activity (low effort zero delay simulation). (PWR-6)
+Warning: There is no defined clock in the design. (PWR-80)
+Warning: Design has unannotated black box outputs. (PWR-428)
+Writing verilog file '/u/prapalli/ECE581-2023/lab2-prapalli/syn/outputs/fifo1_srama.dc.vg'.
+Writing ddc file '../outputs/fifo1_srama.dc.ddc'.
+1
+dc_shell> set_clock_uncertainty -setup 0.1 [get_clocks *clk*]
+Warning: Can't find clocks matching '*clk*' in design 'fifo1_srama'. (UID-95)
+Error: Value for list 'object_list' must have 1 elements. (CMD-036)
+0
+dc_shell> set_clock_uncertainity -hold 0.05 [get_clocks *clk*]
+Warning: Can't find clocks matching '*clk*' in design 'fifo1_srama'. (UID-95)
+Error: unknown command 'set_clock_uncertainity' (CMD-005)
+dc_shell> set_clock_uncertainity -hold 0.05 [get_clocks *clk*]
+Warning: Can't find clocks matching '*clk*' in design 'fifo1_srama'. (UID-95)
+Error: unknown command 'set_clock_uncertainity' (CMD-005)
+dc_shell> man set_clock_uncertainty
+2.  Synopsys Commands                                        Command Reference
+                             set_clock_uncertainty
+
+NAME
+       set_clock_uncertainty
+              Specifies  the  uncertainty  (skew)  of the specified clock net-
+              works.
+
+SYNTAX
+       status set_clock_uncertainty
+               [object_list
+
+                | -from from_clock
+                | -rise_from rise_from_clock
+                | -fall_from fall_from_clock
+               -to to_clock
+                | -rise_to rise_to_clock
+                | -fall_to fall_to_clock]
+               [-rise]
+               [-fall]
+               [-setup]
+               [-hold]
+               uncertainty
+
+   Data Types
+       object_list         collection
+       from_clock          collection
+       rise_from_clock     collection
+       fall_from_clock     collection
+       to_clock            collection
+       rise_to_clock       collection
+       fall_to_clock       collection
+       uncertainty         float
+
+ARGUMENTS
+       object_list
+              Specifies the clocks, ports, or  pins  for  simple  uncertainty.
+              The  uncertainty  is  applied  either  to  the capturing latches
+              clocked by one of the  specified  clocks  or  to  the  capturing
+              latches  whose  clock pins are in the fanout of a specified port
+              or pin.
+
+              You must specify either this argument or a clock pair  with  the
+              -from/-rise_from/-fall_from  and  -to/-rise_to/-fall_to options;
+              you cannot specify both.
+
+       -from from_clock
+              Specifies the source clocks for interclock uncertainty.
+
+              You   must   specify   either   a   clock    pair    with    the
+              -from/-rise_from/-fall_from and -to/-rise_to/-fall_to options or
+              the object_list argument; you cannot specify both.
+
+       -rise_from rise_from_clock
+              Specifies that the uncertainty applies only to the  rising  edge
+              of the source clock.
+
+              You  can  use  only one of the -from, -rise_from, and -fall_from
+              options.
+
+       -fall_from fall_from_clock
+              Specifies that the uncertainty applies only to the falling  edge
+              of the source clock.
+
+              You  can  use  only one of the -from, -rise_from, and -fall_from
+              options.
+
+       -to to_clock
+              Specifies the destination clocks for interclock uncertainty.
+
+              You   must   specify   either   a   clock    pair    with    the
+              -from/-rise_from/-fall_from and -to/-rise_to/-fall_to options or
+              the object_list argument; you cannot specify both.
+
+       -rise_to rise_to_clock
+              Specifies that the uncertainty applies only to the  rising  edge
+              of the destination clock.
+
+              You can use only one of the -to, -rise_to, and -fall_to options.
+
+       -fall_to fall_to_clock
+              Specifies that the uncertainty applies only to the falling  edge
+              of the destination clock.
+
+              You can use only one of the -to, -rise_to, and -fall_to options.
+
+       -rise  Indicates that the uncertainty applies to only the  rising  edge
+              of the destination clock.
+
+              By  default,  the  uncertainty  applies  to  both the rising and
+              falling edges.
+
+              This option is valid only for interclock uncertainty, and is now
+              obsolete.   Unless you need this option for backward-compatibil-
+              ity, use the -rise_to option instead.
+
+       -fall  Indicates that the uncertainty applies to only the falling  edge
+              of the destination clock.
+
+              By  default,  the uncertainty applies to both rising and falling
+              edges.
+
+              This option is valid only for interclock uncertainty, and is now
+              obsolete.   Unless you need this option for backward-compatibil-
+              ity, use the -fall_to option instead.
+
+       -setup Indicates that the uncertainty applies only to setup checks.
+
+              By default, the uncertainty  applies  to  both  setup  and  hold
+              checks.
+
+       -hold  Indicates that the uncertainty applies only to hold checks.
+
+              By  default,  the  uncertainty  applies  to  both setup and hold
+              checks.
+
+       uncertainty
+              Specifies a floating-point number that indicates the uncertainty
+              value.   Typically, clock uncertainty should be positive.  Nega-
+              tive uncertainty values are supported for  constraining  designs
+              with complex clock relationships.  Setting the uncertainty value
+              to a negative number could lead to  optimistic  timing  analysis
+              and should be used with extreme care.
+
+DESCRIPTION
+       This  command specifies the clock uncertainty (skew characteristics) of
+       the specified clock networks.  This command can specify  either  inter-
+       clock  uncertainty  or simple uncertainty.  For interclock uncertainty,
+       use the -from/-rise_from/-fall_from and  -to/-rise_to/-fall_to  options
+       to  specify  the  source  clock  and  the  destination clock; all paths
+       between these clocks receive the uncertainty value.  For simple  uncer-
+       tainty,  use  the object_list argument; the uncertainty value is either
+       to  the  capturing  latches  clocked  by  one  of  the  clocks  in  the
+       object_list  argument  or to the capturing latches whose clock pins are
+       in the fanout of a port or pin specified in the object_list argument.
+
+       Set the uncertainty to the worst  skew  expected  to  the  endpoint  or
+       between  the  clock domains.  You can increase the value to account for
+       additional margin for setup and hold.
+
+       When you specify interclock uncertainty, ensure that you specify it for
+       all  possible  interactions  of the clock domains.  For example, if you
+       specify paths from CLKA to CLKB and CLKB to CLKA, you must specify  the
+       uncertainty for both even if the values are the same.
+
+       Interclock  uncertainty is more specific than simple uncertainty.  If a
+       command that specifies interclock uncertainty conflicts with a  command
+       that  specifies  simple  uncertainty, the command that specifies inter-
+       clock uncertainty takes precedence.
+
+       If there is no applicable interclock uncertainty for a path, the  value
+       for simple uncertainty is used.
+
+       To  remove  the uncertainties set by the set_clock_uncertainty command,
+       use the remove_clock_uncertainty command.
+
+       To view clock uncertainty information, use the report_clock -skew  com-
+       mand.
+
+   Multicorner-Multimode Support
+       This command applies to the current scenario only.
+
+EXAMPLES
+       The  following example specifies that all paths leading to registers or
+       ports clocked by CLK have setup uncertainty of  0.65  and  hold  uncer-
+       tainty of 0.45:
+
+         prompt> set_clock_uncertainty -setup 0.65 [get_clocks CLK]
+         prompt> set_clock_uncertainty -hold 0.45 [get_clocks CLK]
+
+       The  following  example  specifies interclock uncertainties between the
+       PHI1 and PHI2 clock domains:
+
+         prompt> set_clock_uncertainty 0.4 -from PHI1 -to PHI1
+         prompt> set_clock_uncertainty 0.4 -from PHI2 -to PHI2
+         prompt> set_clock_uncertainty 1.1 -from PHI1 -to PHI2
+         prompt> set_clock_uncertainty 1.1 -from PHI2 -to PHI1
+
+       The following example specifies interclock  uncertainties  between  the
+       PHI1 and PHI2 clock domains with specific edges:
+
+         prompt> set_clock_uncertainty 0.4 -rise_from PHI1 -to PHI2
+         prompt> set_clock_uncertainty 0.4 -fall_from PHI2 -rise_to PHI2
+         prompt> set_clock_uncertainty 1.1 -from PHI1 -fall_to PHI2
+
+       The following example shows conflicting set_clock_uncertainty commands,
+       one for simple uncertainty and one  for  interclock  uncertainty.   The
+       interclock uncertainty value of 2 takes precedence.
+
+         prompt> set_clock_uncertainty 5 [get_clocks CLKA]
+         prompt> set_clock_uncertainty 2 \
+            -from [get_clocks CLKB] -to [get_clocks CLKA]
+
+       The  following  example specifies the uncertainty from CLKA to CLKB and
+       from CLKB to CLKA.  Notice that both must be specified even though  the
+       value is the same.
+
+         prompt> set_clock_uncertainty 2 \
+            -from [get_clocks CLKA] -to [get_clocks CLKB]
+         prompt> set_clock_uncertainty 2 \
+            -from [get_clocks CLKB] -to [get_clocks CLKA]
+
+       The  following  example  illustrates a situation in which simple uncer-
+       tainty is used when there is no applicable interclock uncertainty for a
+       path.   The  first command specifies a simple uncertainty of 5 for CLKA
+       paths, and the second command specifies an interclock uncertainty of  2
+       for paths from CLKB to CLKA.  If there are paths between CLKA and other
+       clocks (for example, CLKC, CLKD, and so on) for which interclock uncer-
+       tainty  has  not  been specifically defined, the simple uncertainty (in
+       this case, 5) is used.
+
+         prompt> set_clock_uncertainty 5 [get_clocks CLKA]
+
+         prompt> set_clock_uncertainty 2 \
+                 -from [get_clocks CLKB] -to [get_clocks CLKA]
+
+SEE ALSO
+       remove_clock_uncertainty(2)
+       report_clock(2)
+       set_clock_latency(2)
+       set_clock_transition(2)
+
+                          Version Q-2019.12-SP3
+            Copyright (c) 2020 Synopsys, Inc. All rights reserved.
+dc_shell> set_clock_uncertainty -setup 0.1 [get_clocks *clk*]
+Warning: Can't find clocks matching '*clk*' in design 'fifo1_srama'. (UID-95)
+Error: Value for list 'object_list' must have 1 elements. (CMD-036)
+0
+dc_shell> get_clock *clk*
+Warning: Can't find clocks matching '*clk*' in design 'fifo1_srama'. (UID-95)
+dc_shell> get_clock clk*
+Warning: Can't find clocks matching 'clk*' in design 'fifo1_srama'. (UID-95)
+dc_shell> get_clock *clk
+Warning: Can't find clocks matching '*clk' in design 'fifo1_srama'. (UID-95)
+dc_shell> get_clocks *clk
+Warning: Can't find clocks matching '*clk' in design 'fifo1_srama'. (UID-95)
+dc_shell> get_clocks rclk
+Warning: Can't find clock 'rclk' in design 'fifo1_srama'. (UID-95)
+dc_shell> get_clocks *
+Warning: Can't find clocks matching '*' in design 'fifo1_srama'. (UID-95)
+dc_shell> 
+dc_shell> history
+     1  set top_design fifo1_srama
+     2  source ../scripts/dc.tcl
+     3  set_clock_uncertainty -setup 0.1 [get_clocks *clk*]
+     4  set_clock_uncertainity -hold 0.05 [get_clocks *clk*]
+     5  set_clock_uncertainity -hold 0.05 [get_clocks *clk*]
+     6  man set_clock_uncertainty
+     7  set_clock_uncertainty -setup 0.1 [get_clocks *clk*]
+     8  get_clock *clk*
+     9  get_clock clk*
+    10  get_clock *clk
+    11  get_clocks *clk
+    12  get_clocks rclk
+    13  get_clocks *
+    14  history
+dc_shell> source ../scripts/dc.tcl
+set lib_dir /pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib
+/pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib
+# Decoder ring for the libraries
+# You will need to follow another example or look in the library directories to understand.
+# lib_types is used for the dc/dct linking variables and ICC2 NDM lcoations.
+# /pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/stdcell_hvt/db_nldm
+# /          $lib_dir                   /lib/ $lib_type /db_nldm
+# link_library, Target_library use the sub_lib_types and corner variables. 
+# For sub_lib_types and corner:
+# Example:
+#     saed32hvt_ss0p75v125c.db
+#     |sub_lib  corner    .db
+# The current flow tries to find all sub_lib and all corners in all the search paths.  Any match will be put in the library list.
+# Wild cards can be used, but be careful.  Multiple matches can occur in ways you don't want.
+# For the target library, the same method is used as the link library except only HVT and RVT lib_types are used.
+# ICC2 NDM choosing also uses the sub_lib_types so that only the required libraries and extras are not loaded.
+# fifo1
+#set top_design fifo1
+set add_ios 1
+1
+set pad_design 1
+1
+set design_size { 580 580  } 
+ 580 580  
+set design_io_border 310
+310
+set dc_floorplanning 1
+1
+set enable_dft 0
+0
+set innovus_enable_manual_macro_placement 0
+0
+set rtl_list [list ../rtl/$top_design.sv ]
+../rtl/fifo1_srama.sv
+set slow_corner "ss0p95v125c_2p25v ss0p95v125c ss0p75v125c_i0p75v"
+ss0p95v125c_2p25v ss0p95v125c ss0p75v125c_i0p75v
+set fast_corner "ff0p95vn40c ff1p16vn40c_2p75v ff1p16vn40c"
+ff0p95vn40c ff1p16vn40c_2p75v ff1p16vn40c
+set synth_corners $slow_corner
+ss0p95v125c_2p25v ss0p95v125c ss0p75v125c_i0p75v
+set synth_corners_target "ss0p95v125c" 
+ss0p95v125c
+#set synth_corners_target "ss0p95v125c" 
+set synth_corners_slow $slow_corner
+ss0p95v125c_2p25v ss0p95v125c ss0p75v125c_i0p75v
+set synth_corners_fast $fast_corner
+ff0p95vn40c ff1p16vn40c_2p75v ff1p16vn40c
+set slow_metal Cmax_125
+Cmax_125
+set fast_metal Cmax_125
+Cmax_125
+set lib_types "$lib_dir/io_std/db_nldm $lib_dir/sram_lp/db_nldm $lib_dir/pll/db_nldm"
+/pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/io_std/db_nldm /pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/sram_lp/db_nldm /pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/pll/db_nldm
+set ndm_types "$lib_dir/stdcell_rvt/ndm $lib_dir/stdcell_hvt/ndm $lib_dir/sram_lp/ndm $lib_dir/io_std/ndm  $lib_dir/pll/ndm"
+/pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/stdcell_rvt/ndm /pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/stdcell_hvt/ndm /pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/sram_lp/ndm /pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/io_std/ndm  /pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/pll/ndm
+set lib_types_target "$lib_dir/stdcell_rvt/db_nldm"
+/pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/stdcell_rvt/db_nldm
+# Get just the main standard cells, sram_lps and IOs
+set sub_lib_type "saed32?vt_ saed32sramlp_ saed32io_wb_ saed32pll_"
+saed32?vt_ saed32sramlp_ saed32io_wb_ saed32pll_
+set sub_lib_type_target "saed32rvt_"
+saed32rvt_
+set lef_types [list $lib_dir/stdcell_hvt/lef  $lib_dir/stdcell_rvt/lef $lib_dir/stdcell_lvt/lef $lib_dir/sram_lp/lef/ $lib_dir/io_std/lef $lib_dir/pll/lef ]
+/pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/stdcell_hvt/lef /pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/stdcell_rvt/lef /pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/stdcell_lvt/lef /pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/sram_lp/lef/ /pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/io_std/lef /pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/pll/lef
+set sub_lef_type "saed32nm_?vt_*.lef saed32_sram_lp_*.lef saed32io_std_wb saed32_PLL.lef"
+saed32nm_?vt_*.lef saed32_sram_lp_*.lef saed32io_std_wb saed32_PLL.lef
+set mwlib_types [list $lib_dir/stdcell_hvt/milkyway $lib_dir/stdcell_rvt/milkyway $lib_dir/stdcell_lvt/milkyway  $lib_dir/io_std/milkyway $lib_dir/sram_lp/milkyway $lib_dir/pll/milkyway  ]
+/pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/stdcell_hvt/milkyway /pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/stdcell_rvt/milkyway /pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/stdcell_lvt/milkyway /pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/io_std/milkyway /pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/sram_lp/milkyway /pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/pll/milkyway
+set sub_mwlib_type "saed32nm_?vt_* SRAM32NM saed32io_wb_* SAED32_PLL_FR*"
+saed32nm_?vt_* SRAM32NM saed32io_wb_* SAED32_PLL_FR*
+#set topdir /u/$env(USER)/PSU_RTL2GDS
+set topdir [ lindex [ regexp -inline "(.*)\(syn\|pt\|apr\)" [pwd] ] 1 ]
+/u/prapalli/ECE581-2023/lab2-prapalli/
+set FCL 0
+0
+set split_constraints 0
+0
+fifo1_srama (*)                 sync_r2w
+fifomem_DATASIZE8_ADDRSIZE10    sync_w2r
+rptr_empty_ADDRSIZE10           wptr_full_ADDRSIZE10
+Removing design 'fifomem_DATASIZE8_ADDRSIZE10'
+Removing design 'wptr_full_ADDRSIZE10'
+Removing design 'rptr_empty_ADDRSIZE10'
+Removing design 'fifo1_srama'
+Removing design 'sync_w2r'
+Removing design 'sync_r2w'
+== ANALYZE autoread all files ==
+
+Starting ANALYZE autoread mode...
+Autoread command completed successfully.
+Running PRESTO HDLC
+
+Inferred memory devices in process
+        in routine fifo1_srama line 19 in file
+                '/u/prapalli/ECE581-2023/lab2-prapalli/syn/rtl/fifo1_srama.sv'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|      wdata_reg      | Flip-flop |   8   |  Y  | N  | Y  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully. (fifo1_srama)
+Elaborated 1 design.
+Current design is now 'fifo1_srama'.
+Information: Building the design 'sync_r2w'. (HDL-193)
+
+Inferred memory devices in process
+        in routine sync_r2w line 145 in file
+                '/u/prapalli/ECE581-2023/lab2-prapalli/syn/rtl/fifo1_srama.sv'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|    wq2_rptr_reg     | Flip-flop |  11   |  Y  | N  | Y  | N  | N  | N  | N  |
+|    wq1_rptr_reg     | Flip-flop |  11   |  Y  | N  | Y  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully. (sync_r2w)
+Information: Building the design 'sync_w2r'. (HDL-193)
+
+Inferred memory devices in process
+        in routine sync_w2r line 156 in file
+                '/u/prapalli/ECE581-2023/lab2-prapalli/syn/rtl/fifo1_srama.sv'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|    rq2_wptr_reg     | Flip-flop |  11   |  Y  | N  | Y  | N  | N  | N  | N  |
+|    rq1_wptr_reg     | Flip-flop |  11   |  Y  | N  | Y  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully. (sync_w2r)
+Information: Building the design 'fifomem' instantiated from design 'fifo1_srama' with
+        the parameters "8,10". (HDL-193)
+Warning:  /u/prapalli/ECE581-2023/lab2-prapalli/syn/rtl/fifo1_srama.sv:71: DEFAULT branch of CASE statement cannot be reached. (ELAB-311)
+Warning:  /u/prapalli/ECE581-2023/lab2-prapalli/syn/rtl/fifo1_srama.sv:86: DEFAULT branch of CASE statement cannot be reached. (ELAB-311)
+
+Statistics for case statements in always block at line 69 in file
+        '/u/prapalli/ECE581-2023/lab2-prapalli/syn/rtl/fifo1_srama.sv'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|            71            |    auto/auto     |
+===============================================
+
+Statistics for case statements in always block at line 84 in file
+        '/u/prapalli/ECE581-2023/lab2-prapalli/syn/rtl/fifo1_srama.sv'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|            86            |    auto/auto     |
+===============================================
+Presto compilation completed successfully. (fifomem_DATASIZE8_ADDRSIZE10)
+Information: Building the design 'rptr_empty' instantiated from design 'fifo1_srama' with
+        the parameters "10". (HDL-193)
+
+Inferred memory devices in process
+        in routine rptr_empty_ADDRSIZE10 line 175 in file
+                '/u/prapalli/ECE581-2023/lab2-prapalli/syn/rtl/fifo1_srama.sv'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|      rbin_reg       | Flip-flop |  11   |  Y  | N  | Y  | N  | N  | N  | N  |
+|      rptr_reg       | Flip-flop |  11   |  Y  | N  | Y  | N  | N  | N  | N  |
+===============================================================================
+
+Inferred memory devices in process
+        in routine rptr_empty_ADDRSIZE10 line 186 in file
+                '/u/prapalli/ECE581-2023/lab2-prapalli/syn/rtl/fifo1_srama.sv'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|     rempty_reg      | Flip-flop |   1   |  N  | N  | N  | Y  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully. (rptr_empty_ADDRSIZE10)
+Information: Building the design 'wptr_full' instantiated from design 'fifo1_srama' with
+        the parameters "10". (HDL-193)
+
+Inferred memory devices in process
+        in routine wptr_full_ADDRSIZE10 line 203 in file
+                '/u/prapalli/ECE581-2023/lab2-prapalli/syn/rtl/fifo1_srama.sv'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|      wbin_reg       | Flip-flop |  11   |  Y  | N  | Y  | N  | N  | N  | N  |
+|      wptr_reg       | Flip-flop |  11   |  Y  | N  | Y  | N  | N  | N  | N  |
+===============================================================================
+
+Inferred memory devices in process
+        in routine wptr_full_ADDRSIZE10 line 218 in file
+                '/u/prapalli/ECE581-2023/lab2-prapalli/syn/rtl/fifo1_srama.sv'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|      wfull_reg      | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully. (wptr_full_ADDRSIZE10)
+#####################################################
+proc insert_io { port side} {
+  set this_io io_${side}_${port}
+  if {  $side == "t"   } {
+   if { [get_attribute [get_ports $port ] direction ] == "in" } {
+    create_cell $this_io saed32io_wb_ss0p95v125c_2p25v/I1025_NS
+   } else {
+    create_cell $this_io saed32io_wb_ss0p95v125c_2p25v/D8I1025_NS
+   }
+  }
+  if { $side == "b"  } {
+   if { [get_attribute [get_ports $port ] direction ] == "in" } {
+    create_cell $this_io saed32io_wb_ss0p95v125c_2p25v/I1025_NS
+   } else {
+    create_cell $this_io saed32io_wb_ss0p95v125c_2p25v/D8I1025_NS
+   }
+  }
+  if {  $side == "r"  } {
+   if { [get_attribute [get_ports $port ] direction ] == "in" } {
+    create_cell $this_io saed32io_wb_ss0p95v125c_2p25v/I1025_NS
+   } else {
+    create_cell $this_io saed32io_wb_ss0p95v125c_2p25v/D8I1025_NS
+   }
+  }
+  if { $side == "l"  } {
+   if { [get_attribute [get_ports $port ] direction ] == "in" } {
+    create_cell $this_io saed32io_wb_ss0p95v125c_2p25v/I1025_NS
+   } else {
+    create_cell $this_io saed32io_wb_ss0p95v125c_2p25v/D8I1025_NS
+   }
+  }
+  set pins [ get_pins -of_obj [ get_net $port ] ]
+  foreach_in i $pins { disconnect_net [get_net $port ] $i }
+  set port_net [get_nets -quiet $port ]
+
+  # If only a port is created, the related net is not created and connected to the port.  Do that here.
+  if { [sizeof_collection $port_net ] == 0 } { 
+      create_net $port 
+      connect_net $port [get_ports $port ]
+  }
+
+  connect_net [get_net $port ]  $this_io/PADIO
+  create_net ${this_io}_net
+  foreach_in i $pins { connect_net ${this_io}_net $i }
+  #DIN is input to IO_PAD
+  #DOUT is output of IO_PAD
+  #EN is the IO_PAD enable to output
+  if { [get_attribute [get_ports $port ] direction ] == "in" } {
+     #connect_net [get_nets  *Logic0* ] ${this_io}/EN 
+     connect_net [get_nets  *Logic1* ] ${this_io}/R_EN 
+     connect_net ${this_io}_net ${this_io}/DOUT
+  } else {
+     connect_net [get_nets  *Logic1* ] $this_io/EN 
+     #connect_net [get_nets  *Logic0* ] $this_io/R_EN 
+     connect_net ${this_io}_net $this_io/DIN
+  }
+}
+####################################################
+Error: could not open script file "../../fifo1_srama.add_ios.tcl" (CMD-015)
+Error: could not open script file "../../constraints/fifo1_srama.sdc" (CMD-015)
+Current design is 'fifo1_srama'.
+Information: Performing power optimization. (PWR-850)
+Alib files are up-to-date.
+Warning: "The variable 'compile_high_effort_area_in_incremental' is supported in DC NXT only. Ignoring this setting." (OPT-1726)
+Information: Choosing a test methodology will restrict the optimization of sequential cells. (UIO-12)
+Information: Sequential output inversion is enabled.  SVF file must be used for formal verification. (OPT-1208)
+
+Information: There are 65 potential problems in your design. Please run 'check_design' for more information. (LINT-99)
+
+  Simplifying Design 'fifo1_srama'
+
+Loaded alib file './alib-52/saed32rvt_ss0p95v125c.db.alib'
+Information: State dependent leakage is now switched from on to off.
+
+  Beginning Pass 1 Mapping
+  ------------------------
+  Processing 'fifomem_DATASIZE8_ADDRSIZE10'
+  Processing 'wptr_full_ADDRSIZE10'
+Information: Added key list 'DesignWare' to design 'wptr_full_ADDRSIZE10'. (DDB-72)
+Information: In design 'wptr_full_ADDRSIZE10', the register 'wptr_reg_10_' is removed because it is merged to 'wbin_reg_10_'. (OPT-1215)
+ Implement Synthetic for 'wptr_full_ADDRSIZE10'.
+  Processing 'rptr_empty_ADDRSIZE10'
+Information: Added key list 'DesignWare' to design 'rptr_empty_ADDRSIZE10'. (DDB-72)
+Information: In design 'rptr_empty_ADDRSIZE10', the register 'rptr_reg_10_' is removed because it is merged to 'rbin_reg_10_'. (OPT-1215)
+ Implement Synthetic for 'rptr_empty_ADDRSIZE10'.
+  Processing 'fifo1_srama'
+  Processing 'sync_w2r'
+  Processing 'sync_r2w'
+
+  Updating timing information
+Information: Updating design information... (UID-85)
+Information: The library cell 'PMT3_RVT' in the library 'saed32rvt_ss0p95v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'PMT2_RVT' in the library 'saed32rvt_ss0p95v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'PMT1_RVT' in the library 'saed32rvt_ss0p95v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT3_RVT' in the library 'saed32rvt_ss0p95v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT2_RVT' in the library 'saed32rvt_ss0p95v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT1_RVT' in the library 'saed32rvt_ss0p95v125c' is not characterized for internal power. (PWR-536)
+Information: The target library(s) contains cell(s), other than black boxes, that are not characterized for internal power. (PWR-24)
+Information: Automatic shift-register identification is enabled for scan. Not all registers will be scan-replaced. (OPT-467)
+
+Threshold voltage group cell usage:
+>> saed32cell_svt 100.00%
+
+  Beginning Mapping Optimizations  (Ultra High effort)
+  -------------------------------
+  Mapping Optimization (Phase 1)
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:22:07  211140.4      0.00       0.0      29.7                           66997792.0000
+    0:22:07  211140.4      0.00       0.0      29.7                           66997792.0000
+
+Threshold voltage group cell usage:
+>> saed32cell_svt 100.00%
+
+  Beginning Constant Register Removal
+  -----------------------------------
+
+Threshold voltage group cell usage:
+>> saed32cell_svt 100.00%
+
+  Beginning Global Optimizations
+  ------------------------------
+  Numerical Synthesis (Phase 1)
+  Numerical Synthesis (Phase 2)
+  Global Optimization (Phase 1)
+  Global Optimization (Phase 2)
+  Global Optimization (Phase 3)
+  Global Optimization (Phase 4)
+  Global Optimization (Phase 5)
+  Global Optimization (Phase 6)
+  Global Optimization (Phase 7)
+  Global Optimization (Phase 8)
+  Global Optimization (Phase 9)
+  Global Optimization (Phase 10)
+  Global Optimization (Phase 11)
+  Global Optimization (Phase 12)
+  Global Optimization (Phase 13)
+  Global Optimization (Phase 14)
+  Global Optimization (Phase 15)
+  Global Optimization (Phase 16)
+  Global Optimization (Phase 17)
+  Global Optimization (Phase 18)
+  Global Optimization (Phase 19)
+  Global Optimization (Phase 20)
+  Global Optimization (Phase 21)
+  Global Optimization (Phase 22)
+  Global Optimization (Phase 23)
+  Global Optimization (Phase 24)
+  Global Optimization (Phase 25)
+  Global Optimization (Phase 26)
+  Global Optimization (Phase 27)
+  Global Optimization (Phase 28)
+  Global Optimization (Phase 29)
+
+Threshold voltage group cell usage:
+>> saed32cell_svt 100.00%
+
+  Beginning Isolate Ports
+  -----------------------
+
+Threshold voltage group cell usage:
+>> saed32cell_svt 100.00%
+
+  Beginning Delay Optimization
+  ----------------------------
+    0:22:08  211135.4      0.00       0.0      29.7                           68241544.0000
+    0:22:08  211135.4      0.00       0.0      29.7                           68241544.0000
+    0:22:08  211135.4      0.00       0.0      29.7                           68241544.0000
+    0:22:08  211135.4      0.00       0.0      29.7                           68241544.0000
+
+Threshold voltage group cell usage:
+>> saed32cell_svt 100.00%
+    0:22:08  211122.6      0.00       0.0      29.7                           68134248.0000
+    0:22:08  211122.6      0.00       0.0      29.7                           68134248.0000
+
+  Beginning WLM Backend Optimization
+  --------------------------------------
+    0:22:08  211121.4      0.00       0.0      29.7                           68108208.0000
+    0:22:08  211121.4      0.00       0.0      29.7                           68108208.0000
+    0:22:08  211121.4      0.00       0.0      29.7                           68108208.0000
+    0:22:08  211121.4      0.00       0.0      29.7                           66760292.0000
+    0:22:08  211121.4      0.00       0.0      29.7                           66760292.0000
+    0:22:08  211121.4      0.00       0.0      29.7                           66760292.0000
+    0:22:08  211121.4      0.00       0.0      29.7                           66760292.0000
+    0:22:08  211121.4      0.00       0.0      29.7                           66760292.0000
+    0:22:08  211121.4      0.00       0.0      29.7                           66760292.0000
+    0:22:08  211121.4      0.00       0.0      29.7                           66760292.0000
+    0:22:08  211121.4      0.00       0.0      29.7                           66760292.0000
+    0:22:08  211121.4      0.00       0.0      29.7                           66760292.0000
+    0:22:08  211121.4      0.00       0.0      29.7                           66760292.0000
+    0:22:08  211121.4      0.00       0.0      29.7                           66760292.0000
+    0:22:08  211121.4      0.00       0.0      29.7                           66760292.0000
+    0:22:08  211121.4      0.00       0.0      29.7                           66760292.0000
+    0:22:08  211121.4      0.00       0.0      29.7                           66760292.0000
+    0:22:08  211121.4      0.00       0.0      29.7                           66760292.0000
+    0:22:08  211121.4      0.00       0.0      29.7                           66760292.0000
+    0:22:08  211121.4      0.00       0.0      29.7                           66760292.0000
+    0:22:08  211121.4      0.00       0.0      29.7                           66760292.0000
+    0:22:08  211121.4      0.00       0.0      29.7                           66760292.0000
+
+
+  Beginning Design Rule Fixing  (max_capacitance)
+  ----------------------------
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:22:08  211121.4      0.00       0.0      29.7                           66760292.0000
+  Global Optimization (Phase 30)
+  Global Optimization (Phase 31)
+  Global Optimization (Phase 32)
+    0:22:08  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:22:08  211137.6      0.00       0.0      24.0                           68339168.0000
+
+Threshold voltage group cell usage:
+>> saed32cell_svt 100.00%
+
+
+  Beginning Leakage Power Optimization  (max_leakage_power 0)
+  ------------------------------------
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:22:08  211137.6      0.00       0.0      24.0                           68339168.0000
+  Global Optimization (Phase 33)
+  Global Optimization (Phase 34)
+  Global Optimization (Phase 35)
+  Global Optimization (Phase 36)
+  Global Optimization (Phase 37)
+  Global Optimization (Phase 38)
+  Global Optimization (Phase 39)
+  Global Optimization (Phase 40)
+  Global Optimization (Phase 41)
+  Global Optimization (Phase 42)
+    0:22:08  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:22:08  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:22:08  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:22:08  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:22:08  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:22:08  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:22:08  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:22:08  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:22:08  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:22:08  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:22:08  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:22:08  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:22:08  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:22:08  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:22:08  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:22:08  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:22:08  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:22:08  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:22:08  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:22:08  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:22:08  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:22:08  211137.6      0.00       0.0      24.0                           68339168.0000
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:22:08  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:22:09  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:22:09  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:22:09  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:22:09  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:22:09  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:22:09  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:22:09  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:22:09  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:22:09  211137.6      0.00       0.0      24.0                           68339168.0000
+    0:22:09  211137.6      0.00       0.0      24.0                           68339168.0000
+Loading db file '/pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/io_std/db_nldm/saed32io_wb_ss0p95v125c_2p25v.db'
+Loading db file '/pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/sram_lp/db_nldm/saed32sramlp_ss0p75v125c_i0p75v.db'
+Loading db file '/pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/pll/db_nldm/saed32pll_ss0p95v125c_2p25v.db'
+Loading db file '/pkgs/synopsys/2020/32_28nm/SAED32_EDK/lib/stdcell_rvt/db_nldm/saed32rvt_ss0p95v125c.db'
+
+
+Note: Symbol # after min delay cost means estimated hold TNS across all active scenarios 
+
+
+  Optimization Complete
+  ---------------------
+Information: State dependent leakage is now switched from off to on.
+Information: Propagating switching activity (low effort zero delay simulation). (PWR-6)
+Warning: There is no defined clock in the design. (PWR-80)
+Warning: Design has unannotated black box outputs. (PWR-428)
+Writing verilog file '/u/prapalli/ECE581-2023/lab2-prapalli/syn/outputs/fifo1_srama.dc.vg'.
+Writing ddc file '../outputs/fifo1_srama.dc.ddc'.
+1
+dc_shell> get_clocks *clk*
+Warning: Can't find clocks matching '*clk*' in design 'fifo1_srama'. (UID-95)
+dc_shell> exit 1
+
+Memory usage for this session 202 Mbytes.
+Memory usage for this session including child processes 202 Mbytes.
+CPU usage for this session 21 seconds ( 0.01 hours ).
+Elapsed time for this session 1413 seconds ( 0.39 hours ).
+
+Thank you...
+

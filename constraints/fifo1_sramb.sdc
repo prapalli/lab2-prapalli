@@ -15,8 +15,8 @@ if { [info exists synopsys_program_name ] && ($synopsys_program_name == "icc2_sh
     #set_scenario_status  default -active false
     set_scenario_status func_slow -active true -hold true -setup true
 }
-set wclk_period 2.0
-set rclk_period 2.0
+set wclk_period 0.80
+set rclk_period 0.80
 set wclk2x_period [ expr $wclk_period / 2 ]
 
 create_clock -name "wclk" -period $wclk_period  wclk
@@ -28,6 +28,8 @@ create_clock -name "wclk2x" -period $wclk2x_period wclk2x
 
 set_false_path -from [get_clocks wclk ] -to [get_clocks rclk]
 set_false_path -from [get_clocks rclk ] -to [ get_clocks wclk]
+set_false_path -from [get_clocks wclk2x ] -to [get_clocks rclk]
+set_false_path -from [get_clocks rclk ] -to [get_clocks wclk2x ]
 
 # Add input/output delays in relation to related clocks
 # Can tell the related clock by doing report_timing -group INPUTS  or -group OUTPUTS after using group_path
@@ -41,21 +43,38 @@ set_false_path -from [get_clocks rclk ] -to [ get_clocks wclk]
 #group_path -name INTERNAL -from [all_clocks] -to [all_clocks ]
 group_path -name INPUTS -from [ get_ports -filter "direction==in&&full_name!~*clk*" ]
 group_path -name OUTPUTS -to [ get_ports -filter "direction==out" ]
+
 #set_input_delay is used to contrain input ports
-set_input_delay -max 1.0 -clock wclk2x {wdata_in[*]}
-set_input_delay -max 1.0 -clock rclk {rinc}
-set_input_delay -max 1.0 -clock wclk {winc}
+set_input_delay -max -1 -clock wclk2x {wdata_in[*]}
+set_input_delay -max -1 -clock rclk {rinc}
+set_input_delay -max -1 -clock wclk {winc}
 
 # min is used contrain for minimum delay contraints
-set_input_delay -min 0.5 -clock wclk2x {wdata_in[*]}
-set_input_delay -min 0.5 -clock rclk {rinc}
-set_input_delay -min 0.5 -clock wclk {winc}
+set_input_delay -min -0.5 -clock wclk2x {wdata_in[*]}
+set_input_delay -min -0.5 -clock rclk {rinc}
+set_input_delay -min -0.5 -clock wclk {winc}
 
 #set output delay is used to contrain output ports doe maximum and minimum delays
-set_output_delay -max 1.0 -clock rclk {rdata[*]}
-set_output_delay -max 1.0 -clock rclk {rempty}
-set_output_delay -max 1.0 -clock wclk {wfull}
+set_output_delay -max -0.95 -clock rclk {rdata[*]}
+set_output_delay -max -0.95 -clock rclk {rempty}
+set_output_delay -max -0.95 -clock wclk {wfull}
 
-set_output_delay -min 0.5 -clock rclk {rdata[*]}
-set_output_delay -min 0.5 -clock rclk {rempty}
-set_output_delay -min 0.5 -clock wclk {wfull}
+set_output_delay -min -0.55 -clock rclk {rdata[*]}
+set_output_delay -min -0.55 -clock rclk {rempty}
+set_output_delay -min -0.55 -clock wclk {wfull}
+
+# set_load is used to give load cap for OUTPUT path group
+set_load 0.0001 [get_ports -filter "direction == out"]
+
+#set drive is used to set input resistance for INPUT path group
+set_drive 0.0001 [get_ports -filter "direction == in"]
+
+# clock changes will be modeled with set_clock_uncertainity
+set_clock_latency 1 [get_clocks *clk*]
+# latency is parameter where we moel the clock path delays that arebnot at seen or not at built
+set_clock_uncertainty -setup 0.01 [get_clocks *clk*]
+set_clock_uncertainty -hold 0.005 [get_clocks *clk*]
+# clokcs at=re not ideal to make them transition values the below command is used
+set_clock_transition 0.33 [get_clocks *clk*]
+
+
